@@ -89,6 +89,7 @@ function resolvePromise(promise2, x, resolve, reject) {
 }
 
 Promise.prototype.then = function(onResolved, onRejected) {
+  console.log('then')
   var self = this
   var promise2
   onResolved = typeof onResolved === 'function' ? onResolved : function(v) {
@@ -128,6 +129,7 @@ Promise.prototype.then = function(onResolved, onRejected) {
     // 这里之所以没有异步执行，是因为这些函数必然会被resolve或reject调用，而resolve或reject函数里的内容已是异步执行，构造函数里的定义
     return promise2 = new Promise(function(resolve, reject) {
       self.onResolvedCallback.push(function(value) {
+        console.log(22222)
         try {
           var x = onResolved(value)
           resolvePromise(promise2, x, resolve, reject)
@@ -149,7 +151,6 @@ Promise.prototype.then = function(onResolved, onRejected) {
 }
 
 Promise.prototype.catch = function(onRejected) {
-  console.log('catch')
   return this.then(null, onRejected)
 }
 
@@ -163,7 +164,10 @@ Promise.deferred = Promise.defer = function() {
 }
 
 const promise = new Promise((resolve,reject) => {
-  resolve()
+  setTimeout(() => {
+    resolve()
+
+  },1000)
 }).then(() => {
 
 }).catch(() => {

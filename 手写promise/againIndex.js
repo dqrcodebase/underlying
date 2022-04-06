@@ -1,3 +1,5 @@
+const Promise = require(".")
+
 Promise.prototype.then = function(onResolved,onRejected) {
   var self = this
   var promise2
@@ -96,3 +98,11 @@ function Promise(executor) {
     reject(e)
   }
 }
+
+const promise = new Promise((resolve,reject) => {
+
+}).then(() => {
+
+}).catch(() => {
+
+})
