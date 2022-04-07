@@ -10,6 +10,8 @@
 
 <body>
   <script src="./MyPromise.js"></script>
+  <script src="./MePromise.js"></script>
+
   <script>
     // let op = new MyPromise((resolve, reject) => {
     //   resolve(0)
@@ -45,11 +47,31 @@
     // }, reason => {
     //   console.log((reason));
     // })
-    MyPromise.all([test(1000, 'a'), test(2000, 'b'), test(3000, 'c')]).then(val => {
-      console.log('val:',val)
-    }, reason => {
-      console.log('reason:' , reason);
+  //   MyPromise.all([test(1000, 'a'), test(2000, 'b'), test(3000, 'c')]).then(val => {
+  //     console.log('val:',val)
+  //   }, reason => {
+  //     console.log('reason:' , reason);
+  //   })
+  // </script>
+  <script>
+    let meOp = new MePromise((resolve, reject) => {
+      setTimeout(() => {
+        reject(1)
+      }, 1000)
     })
+
+    meOp.then((val) => {
+      console.log('res:', val)
+      return 'res1'
+    }, (reason) => {
+      console.log('reason:', reason)
+      return 'rej1'
+    }).then((val) => {
+      console.log('res:', val)
+    }, (reason) => {
+      console.log('reason:', reason)
+    })                                                                      
+
   </script>
 </body>
 

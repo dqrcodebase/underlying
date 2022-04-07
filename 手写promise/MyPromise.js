@@ -32,11 +32,11 @@ function MyPromise(executor) {
 }
 
 
-MyPromise.prototype.then = function (onFullfilled, onRejected) {
+MyPromise.prototype.then = function (onFulfilled, onRejected) {
   var self = this
   // 如果是一个空then的话那么就原封不动的返回给下一个then
-  if (!onFullfilled) {
-    onFullfilled = function (val) {
+  if (!onFulfilled) {
+    onFulfilled = function (val) {
       return val;
     }
   }
@@ -66,7 +66,7 @@ MyPromise.prototype.then = function (onFullfilled, onRejected) {
       // 用setTimeout模拟微任务
       setTimeout(function () {
         try {
-          var nextResolveValue = onFullfilled(self.resolveValue)
+          var nextResolveValue = onFulfilled(self.resolveValue)
           // 因为setTimeout是个异步方法所有可以取到nextPromise的值
           ResolutionRetrunPromise(nextPromise, nextResolveValue, res, rej)
         } catch (e) {
@@ -95,7 +95,7 @@ MyPromise.prototype.then = function (onFullfilled, onRejected) {
       self.ResolveCallBackList.push(function () {
         setTimeout(function () {
           try {
-            var nextResolveValue = onFullfilled(self.resolveValue)
+            var nextResolveValue = onFulfilled(self.resolveValue)
             ResolutionRetrunPromise(nextPromise, nextResolveValue, res, rej)
           } catch (e) {
             rej(e)
