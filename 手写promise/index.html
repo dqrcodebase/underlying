@@ -54,22 +54,25 @@
   //   })
   // </script>
   <script>
-    let meOp = new MePromise((resolve, reject) => {
+              let meOp = new MePromise((resolve, reject) => {
       setTimeout(() => {
-        reject(1)
+        resolve(1)
       }, 1000)
     })
 
     meOp.then((val) => {
       console.log('res:', val)
-      return 'res1'
+      // throw Error('is error')
+      return new MePromise((res, rej) => {
+        rej(888)
+      })
     }, (reason) => {
       console.log('reason:', reason)
-      return 'rej1'
-    }).then((val) => {
-      console.log('res:', val)
+      return 2
+    }).then().then((val) => {
+      console.log('res1:', val)
     }, (reason) => {
-      console.log('reason:', reason)
+      console.log('reason1:', reason)
     })                                                                      
 
   </script>
