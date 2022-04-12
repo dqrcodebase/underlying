@@ -13,13 +13,12 @@
   <script src="./MePromise.js"></script>
 
   <script>
-    // let op = new MyPromise((resolve, reject) => {
+    // let op = new Promise((resolve, reject) => {
     //   resolve(0)
+    //   reject(2)
     // })
     // op.then((val) => {
-    //   return new MyPromise((res, rej) => {
-    //     rej(333)
-    //   })
+
     //   console.log(val, 'full')
     //   // throw Error('is error')
     //   return 1
@@ -31,29 +30,31 @@
     // }, (reason) => {
     //   console.log(reason, 'rej2')
     // })
-    function test(interval, val) {
+      function test (interval, val) {
       return new MyPromise((res, rej) => {
         setTimeout(() => {
           // res('no:'+val)
           const num = Math.random()
+          console.log(num);
           num > 0.5 ? res('no:' + val) : rej('no:' + val)
         }, interval)
       })
 
     }
 
-    // MyPromise.race([test(1000, 'a'), test(2000, 'b'), test(3000, 'c')]).then(val => {
-    //   console.log(val)
-    // }, reason => {
-    //   console.log((reason));
-    // })
-  //   MyPromise.all([test(1000, 'a'), test(2000, 'b'), test(3000, 'c')]).then(val => {
-  //     console.log('val:',val)
-  //   }, reason => {
-  //     console.log('reason:' , reason);
-  //   })
-  // </script>
-  <script>
+      // // MyPromise.race([test(1000, 'a'), test(2000, 'b'), test(3000, 'c')]).then(val => {
+      // //   console.log(val)
+      // // }, reason => {
+      // //   console.log((reason));
+      // // })
+      MyPromise.all([test(1000, 'a'), test(2000, 'b'), test(3000, 'c')]).then(val => {
+        console.log('val:', val)
+      }, reason => {
+        console.log('reason:', reason);
+      })
+
+  //</script>
+  <!-- <script>
               let meOp = new MePromise((resolve, reject) => {
       setTimeout(() => {
         resolve(1)
@@ -75,7 +76,7 @@
       console.log('reason1:', reason)
     })                                                                      
 
-  </script>
+  </script> -->
 </body>
 
 </html>

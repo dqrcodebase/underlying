@@ -36,12 +36,11 @@ function MePromise (executor) {
 function ResolutionRetrunPromise (nextPromise, nextResolveValue, res, rej) {
   if (nextResolveValue instanceof MePromise) {
     console.log(nextResolveValue);
-    if (nextResolveValue.status === 'Fulfilled') {
-      res(nextResolveValue.resolveValue)
-    }
-    if (nextResolveValue.status === 'Rejected') {
-      rej(nextResolveValue.rejectReason)
-    }
+    nextResolveValue.then(function(val) {
+      res(val)
+    },function(reason) {
+      rej(reason)
+    })
   } else {
     res(nextResolveValue)
   }

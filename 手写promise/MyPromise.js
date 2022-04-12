@@ -124,6 +124,7 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
 MyPromise.race = function (promiseArr) {
   return new MyPromise(function (resolve, reject) {
     promiseArr.forEach(function (promise, index) {
+      console.log(resolve)
       promise.then(resolve, reject)
     })
   })
@@ -137,14 +138,13 @@ MyPromise.all = function (promiseArr) {
     promiseArr.forEach(function (promise, index) {
       promise.then(function (val) {
         resList.push(val)
+        console.log(index);
         if (index === (length - 1)) {
           rejList.length > 0 ? reject(rejList[0]) : resolve(resList)
         }
         // res(val)
       }, function (reason) {
-        rejList.push(reason)
-        rejList.length > 0 ? reject(rejList[0]) : resolve(resList)
-        // rej(reason)
+        reject(reason) 
       })
     })
   })
