@@ -20,9 +20,9 @@ function promisify (func) {
 // let writeFile = promisify(fs.writeFile)
 // let readDir = promisify(fs.readDir)
 
-readFile('./data/number.text/', 'utf-8').then((val) => {
-  console.log(val);
-})
+// readFile('./data/number.text/', 'utf-8').then((val) => {
+//   console.log(val);
+// })
 
 // 给每一个fs方法都注册了一个异步方法
 function promisiAll (obj) {
